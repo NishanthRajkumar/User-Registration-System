@@ -14,9 +14,14 @@ class UserRegistrationTest(unittest.TestCase):
         self.user_reg = UserRegistration()
 
     def test_validate_name(self):
-        self.assertTrue(self.user_reg.validate_name("Nishanth"))
-        self.assertFalse(self.user_reg.validate_name("nishanth"))
-        self.assertFalse(self.user_reg.validate_name("Ni"))
+        self.assertTrue(self.user_reg.validate_user_info("Nishanth", 'name'))
+        self.assertFalse(self.user_reg.validate_user_info("nishanth", 'name'))
+        self.assertFalse(self.user_reg.validate_user_info("Ni", 'name'))
+    
+    def test_validate_email(self):
+        self.assertTrue(self.user_reg.validate_user_info("nish@gmail.com", 'email'))
+        self.assertFalse(self.user_reg.validate_user_info("n@gmail.com", 'name'))
+        self.assertFalse(self.user_reg.validate_user_info("nish@g.c", 'name'))
 
 if __name__ == '__main__':
     unittest.main()
