@@ -16,7 +16,7 @@ class UserRegistration:
             'name': r"^[A-Z][a-z]{2,}$",
             'email': r"^[A-Za-z0-9]{3,}([.][A-Za-z0-9]{3,})?[@][a-zA-Z]{2,}[.][a-zA-Z]{2,}([.][a-zA-Z]{2})?$",
             'mobile': r"^91 [0-9]{10}$",
-            'password': r"^[\w\S]{8,}"
+            'password': r"^(?=.*[A-Z])(?=.*[\w\S]).{8,}$"
         }
 
     def get_user_info(self) -> dict[str, str]:
