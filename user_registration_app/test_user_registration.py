@@ -1,8 +1,8 @@
 '''
     @Author: Nishanth
-    @Date: 31-03-2022 19:37:00
+    @Date: 31-03-2022 19:48:00
     @Last Modified by: Nishanth
-    @Last Moddified date: 31-03-2022 19:37:00
+    @Last Moddified date: 31-03-2022 19:48:00
     @Title: testing the user registration class and it's pattern validation
 '''
 import unittest
@@ -27,6 +27,11 @@ class UserRegistrationTest(unittest.TestCase):
         self.assertTrue(self.user_reg.validate_user_info("91 9952472949", 'mobile'))
         self.assertFalse(self.user_reg.validate_user_info("19 9952472949", 'mobile'))
         self.assertFalse(self.user_reg.validate_user_info("9952472949", 'mobile'))
+    
+    def test_validate_password(self):
+        self.assertTrue(self.user_reg.validate_user_info("qweasd98@$", 'password'))
+        self.assertFalse(self.user_reg.validate_user_info("qwerty", 'password'))
+        self.assertFalse(self.user_reg.validate_user_info("pass word", 'password'))
 
 if __name__ == '__main__':
     unittest.main()
