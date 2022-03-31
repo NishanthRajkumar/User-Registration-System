@@ -14,7 +14,8 @@ class UserRegistration:
     def __init__(self) -> None:
         self.patterns = {
             'name': r"^[A-Z][a-z]{2,}$",
-            'email': r"^[A-Za-z0-9]{3,}([.][A-Za-z0-9]{3,})?[@][a-zA-Z]{2,}[.][a-zA-Z]{2,}([.][a-zA-Z]{2})?$"
+            'email': r"^[A-Za-z0-9]{3,}([.][A-Za-z0-9]{3,})?[@][a-zA-Z]{2,}[.][a-zA-Z]{2,}([.][a-zA-Z]{2})?$",
+            'mobile': r"^91 [0-9]{10}$"
         }
 
     def get_user_info(self) -> dict[str, str]:
@@ -32,12 +33,17 @@ class UserRegistration:
         user_info['First Name'] = input("Enter First Name: ")
         user_info['Last Name'] = input("Enter Last Name: ")
         user_info['Email'] = input("Enter Email: ")
+        user_info['Mobile'] = input("Enter mobile: ")
+
         if self.validate_user_info(user_info['First Name'], 'name') == False:
             raise ValueError(f"Invalid First Name: {user_info['First Name']}")
         if self.validate_user_info(user_info['Last Name'], 'name') == False:
             raise ValueError(f"Invalid Last Name: {user_info['Last Name']}")
         if self.validate_user_info(user_info['Email'], 'email') == False:
             raise ValueError(f"Invalid Email: {user_info['Email']}")
+        if self.validate_user_info(user_info['Mobile'], 'mobile') == False:
+            raise ValueError(f"Invalid Mobile: {user_info['Mobile']}")
+        
         return user_info
 
     def validate_user_info(self, user_info: str, pattern_type: str) -> bool:
@@ -47,7 +53,9 @@ class UserRegistration:
             
             Parameter:
                 user_info: info given by user
-                pattern_type: pattern type to match with. Valid pattern types: 'name', 'email'
+                pattern_type: 
+                    pattern type to match with. 
+                    Valid pattern types: 'name', 'email', 'mobile'
             
             Return:
                 returns True if valid, else False
