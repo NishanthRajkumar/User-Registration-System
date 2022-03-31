@@ -43,10 +43,11 @@ class UserRegistration:
     def validate_user_info(self, user_info: str, pattern_type: str) -> bool:
         """
             Description:
-                checks if the name of the user is valid
+                checks if the user_info is valid
             
             Parameter:
-                name: name given by user
+                user_info: info given by user
+                pattern_type: pattern type to match with. Valid pattern types: 'name', 'email'
             
             Return:
                 returns True if valid, else False
