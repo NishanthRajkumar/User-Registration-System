@@ -33,6 +33,7 @@ class UserRegistrationTest(unittest.TestCase):
         self.assertFalse(self.user_reg.validate_user_info("qwerty", 'password'))
         self.assertFalse(self.user_reg.validate_user_info("pass word", 'password'))
         self.assertFalse(self.user_reg.validate_user_info("password", 'password'))
+        self.assertFalse(self.user_reg.validate_user_info("Password", 'password'))
 
 if __name__ == '__main__':
     unittest.main()
