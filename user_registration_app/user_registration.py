@@ -1,8 +1,8 @@
 '''
     @Author: Nishanth
-    @Date: 31-03-2022 16:32:00
+    @Date: 31-03-2022 19:48:00
     @Last Modified by: Nishanth
-    @Last Moddified date: 31-03-2022 16:32:00
+    @Last Moddified date: 31-03-2022 19:48:00
     @Title: Validate user input for the user registration details
 '''
 import logging
@@ -15,7 +15,8 @@ class UserRegistration:
         self.patterns = {
             'name': r"^[A-Z][a-z]{2,}$",
             'email': r"^[A-Za-z0-9]{3,}([.][A-Za-z0-9]{3,})?[@][a-zA-Z]{2,}[.][a-zA-Z]{2,}([.][a-zA-Z]{2})?$",
-            'mobile': r"^91 [0-9]{10}$"
+            'mobile': r"^91 [0-9]{10}$",
+            'password': r"^[\w\S]{8,}"
         }
 
     def get_user_info(self) -> dict[str, str]:
@@ -33,7 +34,8 @@ class UserRegistration:
         user_info['First Name'] = input("Enter First Name: ")
         user_info['Last Name'] = input("Enter Last Name: ")
         user_info['Email'] = input("Enter Email: ")
-        user_info['Mobile'] = input("Enter mobile: ")
+        user_info['Mobile'] = input("Enter Mobile: ")
+        user_info['Password'] = input("Enter Password: ")
 
         if self.validate_user_info(user_info['First Name'], 'name') == False:
             raise ValueError(f"Invalid First Name: {user_info['First Name']}")
@@ -43,6 +45,8 @@ class UserRegistration:
             raise ValueError(f"Invalid Email: {user_info['Email']}")
         if self.validate_user_info(user_info['Mobile'], 'mobile') == False:
             raise ValueError(f"Invalid Mobile: {user_info['Mobile']}")
+        if self.validate_user_info(user_info['Password'], 'password') == False:
+            raise ValueError(f"Invalid Password: {user_info['Password']}")
         
         return user_info
 
@@ -55,7 +59,7 @@ class UserRegistration:
                 user_info: info given by user
                 pattern_type: 
                     pattern type to match with. 
-                    Valid pattern types: 'name', 'email', 'mobile'
+                    Valid pattern types: 'name', 'email', 'mobile', 'password'
             
             Return:
                 returns True if valid, else False
