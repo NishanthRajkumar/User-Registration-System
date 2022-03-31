@@ -11,7 +11,7 @@ import sys
 
 class UserRegistration:
 
-    def get_user_info(self):
+    def get_user_info(self) -> dict[str, str]:
         """
             Description:
                 Gets the details from the user
@@ -22,13 +22,14 @@ class UserRegistration:
             Return:
                 returns the valid user info
         """
-        while True:
-            first_name = input("Enter First Name: ")
-            if self.validate_name(first_name) == False:
-                logging.warn("Invalid name. name must be min 3 charcters and starts with capital")
-            else:
-                break
-        return first_name
+        user_info: dict[str, str] = {}
+        user_info['First Name'] = input("Enter First Name: ")
+        user_info['Last Name'] = input("Enter Last Name: ")
+        if self.validate_name(user_info['First Name']) == False:
+            raise ValueError(f"Invalid First Name: {user_info['First Name']}")
+        if self.validate_name(user_info['Last Name']) == False:
+            raise ValueError(f"Invalid Last Name: {user_info['Last Name']}")
+        return user_info
 
     def validate_name(self, name: str) -> bool:
         """
@@ -51,4 +52,8 @@ class UserRegistration:
 if __name__ == '__main__':
     logging.basicConfig(handlers=[logging.FileHandler(r"user_registration_app\user_reg.log", mode = 'a'), logging.StreamHandler(sys.stdout)], level=logging.INFO)
     user_reg = UserRegistration()
-    user_reg.get_user_info()
+    try:
+        user_info = user_reg.get_user_info()
+        logging.info(f"Valid user info:\n{user_info}")
+    except ValueError:
+        logging.exception("User info is invalid")
