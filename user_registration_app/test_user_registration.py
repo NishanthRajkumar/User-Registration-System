@@ -27,6 +27,7 @@ class UserRegistrationTest(unittest.TestCase):
         self.assertTrue(self.user_reg.validate_user_info("91 9952472949", 'mobile'))
         self.assertFalse(self.user_reg.validate_user_info("19 9952472949", 'mobile'))
         self.assertFalse(self.user_reg.validate_user_info("9952472949", 'mobile'))
+        self.assertFalse(self.user_reg.validate_user_info("91 4952472949", 'mobile'))
     
     def test_validate_password(self):
         self.assertTrue(self.user_reg.validate_user_info("Qweasd98@$", 'password'))
